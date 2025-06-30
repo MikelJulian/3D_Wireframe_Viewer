@@ -1,6 +1,6 @@
 3D Wireframe Viewer
 An intuitive and lightweight desktop application for visualizing 3D models in wireframe and solid-faced representations. Developed with tkinter for the user interface and matplotlib for 3D rendering, this tool is ideal for engineers, designers, and enthusiasts who need a quick and straightforward way to inspect 3D models without the complexity of full-fledged CAD software.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
 Key Features
 Multi-Format Loading: Supports popular 3D model file formats including .obj, .ply, and .stl.
 
@@ -13,7 +13,7 @@ Predefined Views: Quickly snap to orthogonal views like Front, Back, Left, Right
 Interactive Navigation: Utilize built-in Matplotlib navigation tools to rotate, zoom, and pan your 3D model with ease.
 
 Render Export: Save snapshots of your current view as .png and .jpg images, perfect for documentation or presentations.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
 How to Run the Application
 To run this application from source, you'll need Python 3 installed along with the required libraries.
 
@@ -37,6 +37,8 @@ Execute the main application file from your terminal:
 Bash
 
 python main.py # Or whatever your main Python file is named (e.g., WireframeViewer.py)
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
 Interface Usage
 Upon launching the application, you'll see a black screen with the message "Import a 3D model to begin".
 
@@ -57,7 +59,7 @@ You can interact directly with the model in the plotting area by dragging your m
 Click "Take Render" to save an image of the current view.
 
 Click "Close Application" to exit.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
 Underlying Technologies
 Python 3
 
@@ -66,12 +68,12 @@ tkinter
 matplotlib
 
 NumPy
-
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
 About the Author
 This project was developed by Mikel Julián Villena as a demonstration of my skills in desktop application development and 3D visualization, with an aspiration to become a Technical Artist. This tool showcases my ability to bridge programming with visual content creation.
 
 If you have any questions, suggestions, or just want to connect, feel free to reach out.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
 Author
 Mikel Julián Villena
 
