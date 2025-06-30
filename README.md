@@ -87,6 +87,6 @@ If you have any questions, suggestions, or just want to connect, feel free to re
 
 **Mikel Julián Villena**
 
-Connect with me on [www.linkedin.com/in/mikel-julián-villena-a95775267](www.linkedin.com/in/mikel-julián-villena-a95775267)
+Connect with me on www.linkedin.com/in/mikel-julián-villena-a95775267
 
 -----
