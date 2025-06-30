@@ -15,32 +15,50 @@ An intuitive and lightweight desktop application for visualizing 3D models in wi
 
 -----
 
-## How to Run the Application
+Perfect, Mikel! That's all the info needed to make your README precise.
 
-To run this application from source, you'll need **Python 3** installed along with the required libraries.
+Here's the finalized README, with your specific username (MikelJulian), repository name (3D_Wireframe_Viewer), and main code file (Motor3d.py) integrated. This version is now complete and ready for you to copy and paste directly into your GitHub repository's README.md file!
 
-**Clone this repository** to your local machine:
+3D Wireframe Viewer
+An intuitive and lightweight desktop application for visualizing 3D models in wireframe and solid-faced representations. Developed with tkinter for the user interface and matplotlib for 3D rendering, this tool is ideal for engineers, designers, and enthusiasts who need a quick and straightforward way to inspect 3D models without the complexity of full-fledged CAD software.
 
-```bash
-git clone https://github.com/your-username/your-repository-name.git
-cd your-repository-name
-```
+Key Features
+Multi-Format Loading: Supports popular 3D model file formats including .obj, .ply, and .stl.
 
-(Remember to replace `your-username` and `your-repository-name` with your actual GitHub details.)
+Flexible Visualization: Easily switch between wireframe and filled face views to suit your inspection needs.
 
-**Install the dependencies** using pip:
+Customizable Color Controls: Adjust colors for edges, vertices, faces, and the background. It also includes an option to reset all colors to their default values.
 
-```bash
+Predefined Views: Quickly snap to orthogonal views like Front, Back, Left, Right, Top, and Bottom for detailed inspection from various angles.
+
+Interactive Navigation: Utilize built-in Matplotlib navigation tools to rotate, zoom, and pan your 3D model with ease.
+
+Render Export: Save snapshots of your current view as .png and .jpg images, perfect for documentation or presentations.
+
+How to Run the Application
+To run this application from source, you'll need Python 3 installed along with the required libraries.
+
+1. Clone the Repository
+Clone this repository to your local machine:
+
+Bash
+
+git clone https://github.com/MikelJulian/3D_Wireframe_Viewer.git
+cd 3D_Wireframe_Viewer
+2. Install Dependencies
+Install the necessary libraries using pip:
+
+Bash
+
 pip install matplotlib numpy
-```
+(Note: tkinter is usually included with standard Python installations.)
 
-(Note: `tkinter` is usually included with standard Python installations.)
+3. Execute the Application
+Run the main application file from your terminal:
 
-**Execute the main application file** from your terminal:
+Bash
 
-```bash
-python main.py # Or whatever your main Python file is named (e.g., WireframeViewer.py)
-```
+python Motor3d.py
 
 -----
 
