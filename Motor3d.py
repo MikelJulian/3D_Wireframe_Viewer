@@ -5,7 +5,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection # Import Line3DCollection
 import os
 
 class WireframeViewer:
@@ -427,6 +427,21 @@ class WireframeViewer:
             btn.config(state='normal')
         self.btn_render.config(state='normal')
 
+    def get_unique_edges(self, faces):
+        """Helper to extract unique edges from faces."""
+        edges = set()
+        for face in faces:
+            # Ensure face has at least 2 vertices to form an edge
+            if len(face) < 2:
+                continue
+            for i in range(len(face)):
+                v1_idx = face[i]
+                v2_idx = face[(i + 1) % len(face)]
+                # Ensure a consistent order for the edge (e.g., smaller index first)
+                edge = tuple(sorted((v1_idx, v2_idx)))
+                edges.add(edge)
+        return list(edges) # Convert to list for iteration or direct processing
+
     def update_plot(self):
         if not self.model_loaded or self.vertices is None:
             self.show_initial_message()
@@ -447,36 +462,34 @@ class WireframeViewer:
         # --- Rendering Logic ---
 
         # 1. Draw Filled Faces (if show_faces_var is True)
-        if self.show_faces_var.get():
-            visible_face_vertices = []
-
+        if self.show_faces_var.get() and self.faces is not None and len(self.faces) > 0:
+            all_triangles = []
             for face in self.faces:
                 if len(face) >= 3:
                     if len(face) == 3:
-                        visible_face_vertices.append(self.vertices[face])
+                        all_triangles.append(self.vertices[face])
                     elif len(face) > 3:
                         # Triangulate N-gon (simple fan triangulation from the first vertex)
                         for i in range(1, len(face) - 1):
                             tri_indices = [face[0], face[i], face[i+1]]
-                            visible_face_vertices.append(self.vertices[tri_indices])
+                            all_triangles.append(self.vertices[tri_indices])
 
-            if visible_face_vertices:
-                mesh = Poly3DCollection(visible_face_vertices, alpha=0.5, facecolor=self.face_color, edgecolors='none')
+            if all_triangles:
+                # Use a single Poly3DCollection for all triangles
+                mesh = Poly3DCollection(all_triangles, alpha=0.5, facecolor=self.face_color, edgecolors='none')
                 self.ax.add_collection3d(mesh)
 
         # 2. Draw Wireframe (if wireframe_var is True)
-        # MOVED AFTER FACES TO RENDER ON TOP
-        if self.wireframe_var.get():
-            for face in self.faces:
-                if len(face) >= 3:
-                    face_vertices = self.vertices[face]
-                    # Close the loop for drawing edges
-                    face_vertices_closed = np.vstack([face_vertices, face_vertices[0]])
+        if self.wireframe_var.get() and self.faces is not None and len(self.faces) > 0:
+            unique_edges = self.get_unique_edges(self.faces)
+            edge_coords = []
+            for v1_idx, v2_idx in unique_edges:
+                edge_coords.append([self.vertices[v1_idx], self.vertices[v2_idx]])
 
-                    self.ax.plot(face_vertices_closed[:, 0],
-                                 face_vertices_closed[:, 1],
-                                 face_vertices_closed[:, 2],
-                                 color=self.wireframe_color, linewidth=1)
+            if edge_coords:
+                lines = Line3DCollection(edge_coords, colors=self.wireframe_color, linewidths=1)
+                self.ax.add_collection(lines)
+
 
         # --- Axis and Visibility Configuration ---
         if self.model_loaded and self.vertices is not None and len(self.vertices) > 0:
@@ -495,6 +508,14 @@ class WireframeViewer:
             self.ax.set_xlim(mid_x - max_range - buffer, mid_x + max_range + buffer)
             self.ax.set_ylim(mid_y - max_range - buffer, mid_y + max_range + buffer)
             self.ax.set_zlim(mid_z - max_range - buffer, mid_z + max_range + buffer)
+        else: # If no model is loaded, revert to default limits for the message
+            self.ax.set_xlim(-1, 1)
+            self.ax.set_ylim(-1, 1)
+            self.ax.set_zlim(-1, 1)
+            self.ax.set_xticks([])
+            self.ax.set_yticks([])
+            self.ax.set_zticks([])
+
 
         self.ax.tick_params(colors='white') # Ensure tick colors remain white
 
